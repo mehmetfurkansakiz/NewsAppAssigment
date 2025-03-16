@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0F0134172D845272007ED4BF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0134162D845272007ED4BF /* FirebaseAnalytics */; };
+		0F0134192D845272007ED4BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0134182D845272007ED4BF /* FirebaseAuth */; };
+		0F01341B2D845272007ED4BF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F01341A2D845272007ED4BF /* FirebaseFirestore */; };
+		0F01341D2D84560A007ED4BF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F01341C2D84560A007ED4BF /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0FD7668C2D80B59B00981FE1 /* NewsAppAssigment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppAssigment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0134172D845272007ED4BF /* FirebaseAnalytics in Frameworks */,
+				0F01341D2D84560A007ED4BF /* FirebaseStorage in Frameworks */,
+				0F0134192D845272007ED4BF /* FirebaseAuth in Frameworks */,
+				0F01341B2D845272007ED4BF /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +79,7 @@
 				0FD766882D80B59B00981FE1 /* Sources */,
 				0FD766892D80B59B00981FE1 /* Frameworks */,
 				0FD7668A2D80B59B00981FE1 /* Resources */,
+				0F0134142D844FC6007ED4BF /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -78,6 +90,10 @@
 			);
 			name = NewsAppAssigment;
 			packageProductDependencies = (
+				0F0134162D845272007ED4BF /* FirebaseAnalytics */,
+				0F0134182D845272007ED4BF /* FirebaseAuth */,
+				0F01341A2D845272007ED4BF /* FirebaseFirestore */,
+				0F01341C2D84560A007ED4BF /* FirebaseStorage */,
 			);
 			productName = NewsAppAssigment;
 			productReference = 0FD7668C2D80B59B00981FE1 /* NewsAppAssigment.app */;
@@ -107,6 +123,9 @@
 			);
 			mainGroup = 0FD766832D80B59B00981FE1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0FD7668D2D80B59B00981FE1 /* Products */;
 			projectDirPath = "";
@@ -126,6 +145,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F0134142D844FC6007ED4BF /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0FD766882D80B59B00981FE1 /* Sources */ = {
@@ -343,6 +385,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F0134162D845272007ED4BF /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0F0134182D845272007ED4BF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0F01341A2D845272007ED4BF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		0F01341C2D84560A007ED4BF /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F0134152D845272007ED4BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0FD766842D80B59B00981FE1 /* Project object */;
 }
