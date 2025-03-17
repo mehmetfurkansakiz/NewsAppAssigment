@@ -21,7 +21,7 @@ class TabBarController: UITabBarController {
 // MARK: - Private Methods
 private extension TabBarController {
     func setupTabs() {
-        let homeVC = createNav(with: "News", and: UIImage(named: "news-icon"), viewController: HomeViewController())
+        let homeVC = createNav(with: "News", and: UIImage(named: "news-icon"), viewController: HomeBuilder.make(with: HomeViewModel()))
         let settingsVC = createNav(with: "Settings", and: UIImage(named: "settings-icon"), viewController: SettingsViewController())
         setViewControllers([homeVC, settingsVC], animated: false)
     }

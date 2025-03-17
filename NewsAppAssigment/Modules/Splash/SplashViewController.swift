@@ -25,12 +25,30 @@ class SplashViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-
+    
+    var viewModel: SplashViewModelProtocol! {
+        didSet {
+            self.viewModel.delegate = self
+        }
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         navigateToTabBar()
+    }
+}
+
+// MARK: - ViewModelDelegate
+extension SplashViewController: SplashViewModelDelegate {
+    func handleSplashViewModelOutput(_ output: SplashViewModelOutput) {
+        switch output {
+        case .navigate:
+            navigateToTabBar()
+        case .error(let message):
+            print("Error: \(message)")
+        }
     }
 }
 
@@ -49,11 +67,10 @@ private extension SplashViewController {
     
     func configureLayout() {
         logoImageView.setupAnchors(
-            leading: view.leadingAnchor,    paddingLeading: 32,
+            leading: view.leadingAnchor, paddingLeading: 32,
             trailing: view.trailingAnchor, paddingTrailing: 32,
             centerY: view.centerYAnchor
         )
-
         
         logoTextLabel.setupAnchors(
             top: logoImageView.bottomAnchor, paddingTop: -64,
@@ -63,7 +80,7 @@ private extension SplashViewController {
     }
     
     func navigateToTabBar() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
             guard self != nil else { return }
             
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
@@ -71,12 +88,12 @@ private extension SplashViewController {
             }
             
             let tabBarController = TabBarController()
-             
+            
             sceneDelegate.window?.rootViewController = tabBarController
         }
-     }
+    }
 }
 
 #Preview {
-    SplashViewController()
+    SplashBuilder.make(with: SplashViewModel())
 }

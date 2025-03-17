@@ -10,18 +10,60 @@ import FirebaseStorage
 
 protocol NewsRepositoryProtocol {
     func createNews(news: News, newsImage: Data, completion: @escaping (Result<Void, NetworkError>) -> Void)
+    func fetchNews(completion: @escaping (Result<[News], NetworkError>) -> Void)
 }
 
 class NewsRepository: NewsRepositoryProtocol {
     private let firestoreDatabase = Firestore.firestore()
     private let storage = Storage.storage().reference()
     
+    func fetchNews(completion: @escaping (Result<[News], NetworkError>) -> Void) {
+        firestoreDatabase.collection("News")
+            .order(by: "created_at", descending: true)
+            .getDocuments { [weak self] snapshot, error in
+                guard self != nil else {
+                    completion(.failure(.invalidResponse))
+                    return
+                }
+                
+                if let error = error {
+                    completion(.failure(.customError(error)))
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    completion(.failure(.invalidResponse))
+                    return
+                }
+                
+                var newsList: [News] = []
+                
+                for document in documents {
+                    let data = document.data()
+                    
+                    let timestamp = data["created_at"] as? Timestamp
+                    let dateString = timestamp?.dateValue().formatted(date: .abbreviated, time: .shortened) ?? ""
+                    
+                    let news = News(
+                        title: data["title"] as? String,
+                        article: data["article"] as? String,
+                        createdAt: dateString,
+                        author: data["author"] as? String,
+                        imageUrl: data["image_url"] as? String
+                    )
+                    
+                    newsList.append(news)
+                }
+                
+                completion(.success(newsList))
+            }
+    }
+    
     func createNews(news: News, newsImage: Data, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         let uuid = UUID().uuidString
         let imageReference = storage.child("news_images/\(uuid).jpg")
         
-        imageReference.putData(newsImage, metadata: nil) { [weak self] metadata, error in
-            guard let self = self else {
+        imageReference.putData(newsImage) { [weak self] _, error in
+            guard self != nil else {
                 completion(.failure(.invalidResponse))
                 return
             }
@@ -43,7 +85,7 @@ class NewsRepository: NewsRepositoryProtocol {
                 }
                 
                 // News data hazırla
-                var newsData: [String: Any] = [
+                let newsData: [String: Any] = [
                     "title": news.title ?? "",
                     "article": news.article ?? "",
                     "author": news.author ?? "",
@@ -51,7 +93,7 @@ class NewsRepository: NewsRepositoryProtocol {
                     "image_url": imageUrl
                 ]
                 
-                self.firestoreDatabase.collection("News").addDocument(data: newsData) { error in
+                self!.firestoreDatabase.collection("News").addDocument(data: newsData) { error in
                     if let error = error {
                         completion(.failure(.customError(error)))
                     } else {

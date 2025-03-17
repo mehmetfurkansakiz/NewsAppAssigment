@@ -11,10 +11,12 @@
 		0F0134192D845272007ED4BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0F0134182D845272007ED4BF /* FirebaseAuth */; };
 		0F01341B2D845272007ED4BF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F01341A2D845272007ED4BF /* FirebaseFirestore */; };
 		0F01341D2D84560A007ED4BF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F01341C2D84560A007ED4BF /* FirebaseStorage */; };
+		0FFA8E522D876A22006E03C7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 0FFA8E512D876A22006E03C7 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0FD7668C2D80B59B00981FE1 /* NewsAppAssigment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppAssigment.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FFA8E512D876A22006E03C7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -56,6 +58,7 @@
 		0FD766832D80B59B00981FE1 = {
 			isa = PBXGroup;
 			children = (
+				0FFA8E512D876A22006E03C7 /* .swiftlint.yml */,
 				0FD7668E2D80B59B00981FE1 /* NewsAppAssigment */,
 				0FD7668D2D80B59B00981FE1 /* Products */,
 			);
@@ -79,7 +82,7 @@
 				0FD766882D80B59B00981FE1 /* Sources */,
 				0FD766892D80B59B00981FE1 /* Frameworks */,
 				0FD7668A2D80B59B00981FE1 /* Resources */,
-				0F0134142D844FC6007ED4BF /* Swiftlint */,
+				0FFA8E532D876B2D006E03C7 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -141,15 +144,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FFA8E522D876A22006E03C7 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F0134142D844FC6007ED4BF /* Swiftlint */ = {
+		0FFA8E532D876B2D006E03C7 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -157,7 +160,7 @@
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -165,7 +168,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -188,6 +190,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T56JGFA2A3;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsAppAssigment/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -220,6 +223,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T56JGFA2A3;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsAppAssigment/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
