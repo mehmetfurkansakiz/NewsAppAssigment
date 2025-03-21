@@ -10,14 +10,14 @@ import UIKit
 class SplashViewController: UIViewController {
     
     // MARK: - Properties
-    private let logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "newspaper-icon")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    private let logoTextLabel: UILabel = {
+    private lazy var logoTextLabel: UILabel = {
         let label = UILabel()
         label.text = "News App"
         label.font = .systemFont(ofSize: 24, weight: .bold)
@@ -80,7 +80,7 @@ private extension SplashViewController {
     }
     
     func navigateToTabBar() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
             guard self != nil else { return }
             
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {

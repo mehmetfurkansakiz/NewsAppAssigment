@@ -8,8 +8,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
     // MARK: - Properties
-    lazy var newsTableView: UITableView = {
+    private lazy var newsTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
