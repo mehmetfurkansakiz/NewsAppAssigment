@@ -111,7 +111,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
-        titleLabel.textColor = UIColor(named: "181818")!
+        titleLabel.textColor = UIColor(named: "A9A9A9")!
         titleLabel.text = SettingsSection(rawValue: section)?.title
         
         headerView.addSubview(titleLabel)
