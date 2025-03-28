@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SplashViewController: UIViewController {
     
@@ -26,29 +27,11 @@ class SplashViewController: UIViewController {
         return label
     }()
     
-    var viewModel: SplashViewModelProtocol! {
-        didSet {
-            self.viewModel.delegate = self
-        }
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        navigateToTabBar()
-    }
-}
-
-// MARK: - ViewModelDelegate
-extension SplashViewController: SplashViewModelDelegate {
-    func handleSplashViewModelOutput(_ output: SplashViewModelOutput) {
-        switch output {
-        case .navigate:
-            navigateToTabBar()
-        case .error(let message):
-            print("Error: \(message)")
-        }
+        ifUserLoginNavigation()
     }
 }
 
@@ -78,22 +61,22 @@ private extension SplashViewController {
             trailing: logoImageView.trailingAnchor
         )
     }
-    
-    func navigateToTabBar() {
-        DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
-            guard self != nil else { return }
-            
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-                return
-            }
-            
-            let tabBarController = SignUpBuilder.make(with: SignUpViewModel())
-            
-            sceneDelegate.window?.rootViewController = tabBarController
+}
+
+// MARK: - Navigation
+private extension SplashViewController {
+    private func ifUserLoginNavigation() {
+        if Auth.auth().currentUser != nil {
+            // if user login
+            navigateToWithAnimation(to: TabBarController())
+        } else {
+            // if user not login
+            let signInVC = SignInBuilder.make(with: SignInViewModel())
+            navigateToWithAnimation(to: signInVC)
         }
     }
 }
 
 #Preview {
-    SplashBuilder.make(with: SplashViewModel())
+    SplashViewController()
 }
