@@ -5,7 +5,7 @@
 //  Created by furkan sakız on 21.03.2025.
 //
 
-final class LoginBuilder {
+final class SignInBuilder {
     class func make(with viewModel: SignInViewModel) -> SignInViewController {
         let controller = SignInViewController()
         controller.viewModel = viewModel

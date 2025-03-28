@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 extension UITextField {
     func setLeftPadding(_ amount: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.height))
@@ -55,8 +53,8 @@ class PasswordTextField: UITextField {
         
         let buttonContainer = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         let button = UIButton(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
-        button.setImage(UIImage(named: "ic-show-icon"), for: .normal)
-        button.setImage(UIImage(named: "ic-hide-icon"), for: .selected)
+        button.setImage(UIImage(named: "show-icon"), for: .normal)
+        button.setImage(UIImage(named: "hide-icon"), for: .selected)
         buttonContainer.addSubview(button)
         
         rightView = buttonContainer

@@ -87,7 +87,7 @@ private extension SplashViewController {
                 return
             }
             
-            let tabBarController = TabBarController()
+            let tabBarController = SignUpBuilder.make(with: SignUpViewModel())
             
             sceneDelegate.window?.rootViewController = tabBarController
         }

@@ -50,6 +50,8 @@ class SignUpViewController: UIViewController {
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
+        textField.backgroundColor = .clear
+        textField.textColor = UIColor(named: "303030")
         textField.setLeftPadding(8)
         textField.setRightPadding(8)
         let placeholderText = "Enter your email"
@@ -76,6 +78,8 @@ class SignUpViewController: UIViewController {
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
+        textField.backgroundColor = .clear
+        textField.textColor = UIColor(named: "303030")
         let placeholderText = "Enter your password"
         let placeholderColor = UIColor(named: "303030")
         textField.attributedPlaceholder = NSAttributedString(
@@ -100,6 +104,8 @@ class SignUpViewController: UIViewController {
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
+        textField.backgroundColor = .clear
+        textField.textColor = UIColor(named: "303030")
         let placeholderText = "Repeat your password"
         let placeholderColor = UIColor(named: "303030")
         textField.attributedPlaceholder = NSAttributedString(
@@ -141,10 +147,11 @@ class SignUpViewController: UIViewController {
             self.viewModel.delegate = self
         }
     }
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        setupDismissKeyboardGesture()
     }
 }
 
@@ -152,7 +159,14 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: SignUpViewModelDelegate {
     func handleSignUpViewModelOutput(_ output: SignUpViewModelOutput) {
         switch output {
-            
+        case .showLoading:
+            showLoadingIndicator()
+        case .hideLoading:
+            hideLoadingIndicator()
+        case .showError(message: let message):
+            showError(message: message)
+        case .signUpSuccess:
+            navigateToWithAnimation(to: TabBarController())
         }
     }
 }
@@ -160,8 +174,11 @@ extension SignUpViewController: SignUpViewModelDelegate {
 // MARK: - Private Methods
 private extension SignUpViewController {
     func configureView() {
+        view.backgroundColor = UIColor(named: "FBFBFB")
+        
         addViews()
         configureLayout()
+        setupActions()
     }
     
     func addViews() {
@@ -209,7 +226,7 @@ private extension SignUpViewController {
         )
         
         passwordLabel.setupAnchors(
-            top: emailTextField.bottomAnchor, paddingTop: 20,
+            top: emailTextField.bottomAnchor, paddingTop: 16,
             leading: view.leadingAnchor, paddingLeading: 20
         )
         
@@ -221,7 +238,7 @@ private extension SignUpViewController {
         )
         
         passwordRepeatLabel.setupAnchors(
-            top: passwordTextField.bottomAnchor, paddingTop: 20,
+            top: passwordTextField.bottomAnchor, paddingTop: 16,
             leading: view.leadingAnchor, paddingLeading: 20
         )
         
@@ -250,6 +267,39 @@ private extension SignUpViewController {
         )
     }
 }
+
+// MARK: - Actions
+private extension SignUpViewController {
+    func setupActions() {
+        
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func signUpButtonTapped() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              let passwordRepeat = passwordRepeatTextField.text else {
+            return
+        }
+        
+        viewModel.signUp(email: email, password: password, passwordRepeat: passwordRepeat)
+    }
+    
+    @objc func signInButtonTapped() {
+        navigateToWithAnimation(to: SignInBuilder.make(with: SignInViewModel()))
+    }
+    
+    func setupDismissKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}   
 
 #Preview {
     SignUpViewController()

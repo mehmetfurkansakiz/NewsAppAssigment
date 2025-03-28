@@ -8,8 +8,8 @@
 import UIKit
 
 class SignInViewController: UIViewController {
-    
     // MARK: - Properties
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "NewsApp"
@@ -50,6 +50,8 @@ class SignInViewController: UIViewController {
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
+        textField.backgroundColor = .clear
+        textField.textColor = UIColor(named: "303030")
         textField.setLeftPadding(8)
         textField.setRightPadding(8)
         let placeholderText = "Enter your email"
@@ -76,6 +78,8 @@ class SignInViewController: UIViewController {
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
+        textField.backgroundColor = .clear
+        textField.textColor = UIColor(named: "303030")
         let placeholderText = "Enter your password"
         let placeholderColor = UIColor(named: "303030")
         textField.attributedPlaceholder = NSAttributedString(
@@ -122,33 +126,45 @@ class SignInViewController: UIViewController {
     
     var viewModel: SignInViewModelProtocol! {
         didSet {
-            self.viewModel.delegate = self
+            viewModel.delegate = self
         }
     }
     
     // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        setupDismissKeyboardGesture()
     }
-    
 }
 
 // MARK: - ViewModelDelegate
+
 extension SignInViewController: SignInViewModelDelegate {
     func handleSignInViewModelOutput(_ output: SignInViewModelOutput) {
         switch output {
-            
+        case .showLoading:
+            showLoadingIndicator()
+        case .hideLoading:
+            hideLoadingIndicator()
+        case .showError(message: let message):
+            showError(message: message)
+        case .signInSuccess:
+            navigateToWithAnimation(to: TabBarController())
         }
     }
 }
 
 // MARK: - Private Methods
+
 extension SignInViewController {
     func configureView() {
         view.backgroundColor = UIColor(named: "FBFBFB")
+        
         addViews()
         configureLayout()
+        setupActions()
     }
     
     func addViews() {
@@ -195,7 +211,7 @@ extension SignInViewController {
         )
         
         passwordLabel.setupAnchors(
-            top: emailTextField.bottomAnchor, paddingTop: 20,
+            top: emailTextField.bottomAnchor, paddingTop: 16,
             leading: view.leadingAnchor, paddingLeading: 20
         )
         
@@ -227,6 +243,48 @@ extension SignInViewController {
             top: orLabel.bottomAnchor,
             centerX: view.centerXAnchor
         )
+    }
+}
+
+// MARK: - Actions
+
+private extension SignInViewController {
+    func setupActions() {
+        // Configure sign-in button action
+        signInButton.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        
+        createAccountButton.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
+        
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func forgotPasswordButtonTapped() {
+        // TODO: Implement forgot password functionality
+        print("Forgot Password tapped")
+    }
+    
+    @objc func signInButtonTapped() {
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text
+        else {
+            return
+        }
+        
+        viewModel.signIn(email: email, password: password)
+    }
+    
+    @objc func createAccountButtonTapped() {
+        navigateToWithAnimation(to: SignUpBuilder.make(with: SignUpViewModel()))
+    }
+    
+    func setupDismissKeyboardGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

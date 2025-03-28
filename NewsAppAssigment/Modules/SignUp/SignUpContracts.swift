@@ -7,6 +7,7 @@
 
 protocol SignUpViewModelProtocol {
     var delegate: SignUpViewModelDelegate? { get set }
+    func signUp(email: String, password: String, passwordRepeat: String)
 }
 
 protocol SignUpViewModelDelegate: AnyObject {
@@ -14,5 +15,8 @@ protocol SignUpViewModelDelegate: AnyObject {
 }
 
 enum SignUpViewModelOutput {
-    
+    case showLoading
+    case hideLoading
+    case showError(message: String)
+    case signUpSuccess
 }
