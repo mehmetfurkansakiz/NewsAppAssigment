@@ -11,9 +11,12 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     private lazy var newsTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -46,6 +49,7 @@ extension HomeViewController: HomeViewModelDelegate {
 // MARK: - Private Methods
 private extension HomeViewController {
     func configureView() {
+        view.backgroundColor = UIColor(named: "FBFBFB")
         addViews()
         configureLayout()
     }
@@ -56,10 +60,10 @@ private extension HomeViewController {
     
     func configureLayout() {
         newsTableView.setupAnchors(
-            top: view.topAnchor, paddingTop: 8,
-            bottom: view.bottomAnchor, paddingBottom: 8,
-            leading: view.leadingAnchor, paddingLeading: 16,
-            trailing: view.trailingAnchor, paddingTrailing: 16
+            top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 8,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 8,
+            leading: view.safeAreaLayoutGuide.leadingAnchor, paddingLeading: 16,
+            trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTrailing: 16
         )
     }
 }
@@ -71,8 +75,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = viewModel.news[indexPath.row].title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let news = viewModel.news[indexPath.row]
+        cell.configure(with: news)
+        
         return cell
     }
 }

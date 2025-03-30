@@ -41,12 +41,13 @@ class NewsRepository: NewsRepositoryProtocol {
                     let data = document.data()
                     
                     let timestamp = data["created_at"] as? Timestamp
-                    let dateString = timestamp?.dateValue().formatted(date: .abbreviated, time: .shortened) ?? ""
+                    let date = timestamp?.dateValue()
                     
                     let news = News(
                         title: data["title"] as? String,
                         article: data["article"] as? String,
-                        createdAt: dateString,
+                        category: data["category"] as? String,
+                        createdAt: date,
                         author: data["author"] as? String,
                         imageUrl: data["image_url"] as? String
                     )
@@ -88,6 +89,7 @@ class NewsRepository: NewsRepositoryProtocol {
                 let newsData: [String: Any] = [
                     "title": news.title ?? "",
                     "article": news.article ?? "",
+                    "category": news.category ?? "",
                     "author": news.author ?? "",
                     "created_at": FieldValue.serverTimestamp(),
                     "image_url": imageUrl
