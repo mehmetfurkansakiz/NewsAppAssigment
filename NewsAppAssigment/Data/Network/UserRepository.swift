@@ -16,7 +16,7 @@ protocol UserRepositoryProtocol {
 
 class UserRepository: UserRepositoryProtocol {
     func createUser(email: String, password: String, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if let error = error {
                 completion(.failure(.customError(error)))
                 return
@@ -27,7 +27,7 @@ class UserRepository: UserRepositoryProtocol {
     }
     
     func signIn(email: String, password: String, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
             if let error = error {
                 completion(.failure(.customError(error)))
                 return

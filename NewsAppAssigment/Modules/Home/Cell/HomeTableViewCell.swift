@@ -14,7 +14,7 @@ class HomeTableViewCell: UITableViewCell {
     
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         return imageView
@@ -30,14 +30,14 @@ class HomeTableViewCell: UITableViewCell {
     
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor(named: "A9A9A9")
         return label
     }()
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor(named: "303030")
         return label
     }()
@@ -69,13 +69,13 @@ class HomeTableViewCell: UITableViewCell {
         }
         
         if let imageUrl = news.imageUrl, let url = URL(string: imageUrl) {
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    DispatchQueue.main.async {
-                        self.newsImageView.image = UIImage(data: data)
-                    }
-                }
-            }
+            newsImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "placeholder-image"),
+                options: [
+                    .transition(.fade(0.2)),
+                    .cacheOriginalImage
+                ])
         }
     }
 }
@@ -98,8 +98,8 @@ private extension HomeTableViewCell {
     
     func configureLayout() {
         newsImageView.setupAnchors(
-            top: contentView.topAnchor,
-            bottom: contentView.bottomAnchor,
+            top: contentView.topAnchor, paddingTop: 8,
+            bottom: contentView.bottomAnchor, paddingBottom: 8,
             leading: contentView.leadingAnchor,
             width: 120,
             height: 120

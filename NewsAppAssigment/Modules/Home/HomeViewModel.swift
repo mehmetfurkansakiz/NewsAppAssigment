@@ -14,6 +14,10 @@ final class HomeViewModel: HomeViewModelProtocol {
         self.newsRepo = repository
     }
     
+    func select(with selectedNews: News) {
+        navigate(to: .homeDetail(viewModel: HomeDetailViewModel(news: selectedNews)))
+    }
+    
     func fetchNews() {
         newsRepo.fetchNews { [weak self] result in
             guard let self = self else { return }
@@ -30,5 +34,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     private func notify(_ output: HomeViewModelOutput) {
         delegate?.handleHomeViewModelOutput(output)
+    }
+    
+    private func navigate(to route: HomeRoute) {
+        delegate?.navigate(to: route)
     }
 }

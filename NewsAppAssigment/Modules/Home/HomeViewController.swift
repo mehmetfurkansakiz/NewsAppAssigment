@@ -44,6 +44,14 @@ extension HomeViewController: HomeViewModelDelegate {
             }
         }
     }
+    
+    func navigate(to route: HomeRoute) {
+        switch route {
+        case .homeDetail(let viewModel):
+            let homeDetail = HomeDetailBuilder.make(with: viewModel)
+            navigationController?.pushViewController(homeDetail, animated: true)
+        }
+    }
 }
 
 // MARK: - Private Methods
@@ -83,5 +91,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: news)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedNews = viewModel.news[indexPath.row]
+        viewModel.select(with: selectedNews)
     }
 }
