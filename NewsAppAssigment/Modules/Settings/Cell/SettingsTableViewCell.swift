@@ -37,6 +37,7 @@ final class SettingsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureView()
+        customSelectionStyle()
     }
     
     override func prepareForReuse() {
@@ -91,5 +92,11 @@ private extension SettingsTableViewCell {
             centerY: contentView.centerYAnchor,
             height: 16
         )
+    }
+    
+    private func customSelectionStyle() {
+        let selectionView = UIView()
+        selectionView.backgroundColor = UIColor(named: "A9A9A9")?.withAlphaComponent(0.1)
+        self.selectedBackgroundView = selectionView
     }
 }

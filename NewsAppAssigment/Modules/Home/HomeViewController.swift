@@ -58,6 +58,7 @@ extension HomeViewController: HomeViewModelDelegate {
 private extension HomeViewController {
     func configureView() {
         view.backgroundColor = UIColor(named: "FBFBFB")
+        
         addViews()
         configureLayout()
     }

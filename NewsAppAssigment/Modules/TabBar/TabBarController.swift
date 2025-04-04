@@ -58,7 +58,7 @@ private extension TabBarController {
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-        UINavigationBar.appearance().tintColor = UIColor(named: "303030")
+        UINavigationBar.appearance().tintColor = UIColor(named: "FBFBFB")
     }
     
     func createNav(

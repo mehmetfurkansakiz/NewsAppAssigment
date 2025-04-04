@@ -92,7 +92,6 @@ extension HomeDetailViewController: HomeDetailViewModelDelegate {
 private extension HomeDetailViewController {
     func configureView() {
         view.backgroundColor = UIColor(named: "FBFBFB")
-        navigationController?.navigationBar.tintColor = UIColor(named: "FBFBFB")
         navigationItem.title = "News Detail"
         
         addViews()
