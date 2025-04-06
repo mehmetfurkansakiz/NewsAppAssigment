@@ -9,14 +9,24 @@ import UIKit
 
 protocol AdminNewsViewModelProtocol {
     var delegate: AdminNewsViewModelDelegate? { get set }
+    func didSelectSetting(at index: Int)
 }
 
 protocol AdminNewsViewModelDelegate: AnyObject {
     func handleAdminNewsViewModelOutput(_ output: AdminNewsViewModelOutput)
+    func navigate(to route: AdminNewsRouter)
 }
 
 enum AdminNewsViewModelOutput {
-    
+    case showError(String)
+    case editNews
+    case deleteNews
+    case statistics
+    case users
+}
+
+enum AdminNewsRouter {
+    case addNews(AddNewsViewModel)
 }
 
 enum AdminActions: Int, CaseIterable {
@@ -28,7 +38,7 @@ enum AdminActions: Int, CaseIterable {
     
     var title: String {
         switch self {
-        case .addNews: return "Add News Add News"
+        case .addNews: return "Add News"
         case .editNews: return "Edit News"
         case .deleteNews: return "Delete News"
         case .statistics: return "Statistics"

@@ -47,7 +47,7 @@ class PasswordTextField: UITextField {
     private func setup() {
         self.isSecureTextEntry = true
         
-        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: self.frame.height))
         self.leftView = leftPaddingView
         self.leftViewMode = .always
         

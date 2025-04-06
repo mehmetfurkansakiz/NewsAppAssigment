@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 protocol NewsRepositoryProtocol {
-    func createNews(news: News, newsImage: Data, completion: @escaping (Result<Void, NetworkError>) -> Void)
+    func createNews(news: News, completion: @escaping (Result<Void, NetworkError>) -> Void)
     func fetchNews(completion: @escaping (Result<[News], NetworkError>) -> Void)
 }
 
@@ -51,19 +51,17 @@ class NewsRepository: NewsRepositoryProtocol {
                         author: data["author"] as? String,
                         imageUrl: data["image_url"] as? String
                     )
-                    
                     newsList.append(news)
                 }
-                
                 completion(.success(newsList))
             }
     }
     
-    func createNews(news: News, newsImage: Data, completion: @escaping (Result<Void, NetworkError>) -> Void) {
+    func createNews(news: News, completion: @escaping (Result<Void, NetworkError>) -> Void) {
         let uuid = UUID().uuidString
         let imageReference = storage.child("news_images/\(uuid).jpg")
         
-        imageReference.putData(newsImage) { [weak self] _, error in
+        imageReference.putData(news.imageData!) { [weak self] _, error in
             guard self != nil else {
                 completion(.failure(.invalidResponse))
                 return

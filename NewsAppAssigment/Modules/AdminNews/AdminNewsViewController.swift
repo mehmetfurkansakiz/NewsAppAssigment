@@ -39,8 +39,28 @@ class AdminNewsViewController: UIViewController {
 extension AdminNewsViewController: AdminNewsViewModelDelegate {
     func handleAdminNewsViewModelOutput(_ output: AdminNewsViewModelOutput) {
         switch output {
-            
+        case .showError(let error):
+            showError(message: error)
+        case .editNews:
+            print("Navigate to edit news")
+        case .deleteNews:
+            print("Navigate to delete news")
+        case .statistics:
+            print("Navigate to statistics")
+        case .users:
+            print("Navigate to users")
         }
+    }
+    
+    func navigate(to route: AdminNewsRouter) {
+        var controller = UIViewController()
+        
+        switch route {
+        case .addNews(let viewModel):
+            controller = AddNewsBuilder.make(with: viewModel)
+        }
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -93,7 +113,8 @@ extension AdminNewsViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected action: \(adminActions[indexPath.item].title)")
+        let selectedAction = adminActions[indexPath.item]
+        viewModel.didSelectSetting(at: selectedAction.rawValue)
     }
 }
 

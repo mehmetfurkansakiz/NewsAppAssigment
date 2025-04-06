@@ -36,12 +36,10 @@ class SettingsViewController: UIViewController {
 // MARK: - ViewModelDelegate
 extension SettingsViewController: SettingsViewModelDelegate {
     func handleSettingsViewModelOutput(_ output: SettingsViewModelOutput) {
-        var viewController = UIViewController()
+        
         switch output {
         case .updateTableView:
             settingsTableView.reloadData()
-        case .showAdminPanel:
-            viewController = AdminNewsBuilder.make(with: AdminNewsViewModel())
         case .showNotificationSettings:
             print("Navigate to notification settings")
         case .rateApp:
@@ -51,7 +49,17 @@ extension SettingsViewController: SettingsViewModelDelegate {
         case .showTermsOfService:
             print("Show terms of service")
         }
-        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func navigate(to route: SettingsRouter) {
+        var controller = UIViewController()
+        
+        switch route {
+        case .adminNews(let viewModel):
+            controller = AdminNewsBuilder.make(with: viewModel)
+        }
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

@@ -13,15 +13,19 @@ protocol SettingsViewModelProtocol {
 
 protocol SettingsViewModelDelegate: AnyObject {
     func handleSettingsViewModelOutput(_ output: SettingsViewModelOutput)
+    func navigate(to route: SettingsRouter)
 }
 
 enum SettingsViewModelOutput {
     case updateTableView
-    case showAdminPanel
     case showNotificationSettings
     case rateApp
     case showPrivacyPolicy
     case showTermsOfService
+}
+
+enum SettingsRouter {
+    case adminNews(AdminNewsViewModel)
 }
 
 enum SettingsSection: Int, CaseIterable {

@@ -47,13 +47,12 @@ class SignInViewController: UIViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
-        textField.layer.borderWidth = 2
+        textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
         textField.textColor = UIColor(named: "303030")
-        textField.setLeftPadding(8)
-        textField.setRightPadding(8)
+        textField.setPadding(left: 8, right: 8)
         let placeholderText = "Enter your email"
         let placeholderColor = UIColor(named: "303030")
         textField.attributedPlaceholder = NSAttributedString(
@@ -75,7 +74,7 @@ class SignInViewController: UIViewController {
         let textField = PasswordTextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
-        textField.layer.borderWidth = 2
+        textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(named: "A9A9A9")?.cgColor
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear

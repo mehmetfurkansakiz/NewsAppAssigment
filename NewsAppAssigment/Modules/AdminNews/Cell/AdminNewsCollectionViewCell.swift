@@ -31,8 +31,9 @@ class AdminNewsCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = UIColor(named: "FBFBFB")
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -80,10 +81,6 @@ private extension AdminNewsCollectionViewCell {
         
         iconImageView.setupAnchors(
             width: 32,
-            height: 32
-        )
-        
-        titleLabel.setupAnchors(
             height: 32
         )
     }

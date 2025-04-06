@@ -14,6 +14,7 @@ struct News {
     var createdAt: Date?
     var author: String?
     var imageUrl: String?
+    var imageData: Data?
     
     enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"

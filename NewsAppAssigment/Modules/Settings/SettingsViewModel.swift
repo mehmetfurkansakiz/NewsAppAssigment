@@ -17,19 +17,23 @@ final class SettingsViewModel: SettingsViewModelProtocol {
         
         switch setting {
         case .admin:
-            delegate?.handleSettingsViewModelOutput(.showAdminPanel)
+            navigate(to: .adminNews(AdminNewsViewModel()))
         case .notification:
-            delegate?.handleSettingsViewModelOutput(.showNotificationSettings)
+            notify(.showNotificationSettings)
         case .rateUs:
-            delegate?.handleSettingsViewModelOutput(.rateApp)
+            notify(.rateApp)
         case .privacyPolicy:
-            delegate?.handleSettingsViewModelOutput(.showPrivacyPolicy)
+            notify(.showPrivacyPolicy)
         case .termsOfService:
-            delegate?.handleSettingsViewModelOutput(.showTermsOfService)
+            notify(.showTermsOfService)
         }
     }
     
     private func notify(_ output: SettingsViewModelOutput) {
         delegate?.handleSettingsViewModelOutput(output)
+    }
+    
+    private func navigate(to route: SettingsRouter) {
+        delegate?.navigate(to: route)
     }
 }
