@@ -32,6 +32,12 @@ class AddNewsViewController: UIViewController {
         return imageView
     }()
     
+    private let imageContainerButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        return button
+    }()
+    
     private let addImageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
@@ -158,6 +164,7 @@ private extension AddNewsViewController {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(imageView)
+        imageView.addSubview(imageContainerButton)
         contentView.addSubview(addImageButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(titleTextField)
@@ -189,6 +196,13 @@ private extension AddNewsViewController {
             leading: contentView.leadingAnchor, paddingLeading: 16,
             trailing: contentView.trailingAnchor, paddingTrailing: 16,
             height: 240
+        )
+        
+        imageContainerButton.setupAnchors(
+            top: imageView.topAnchor,
+            bottom: imageView.bottomAnchor,
+            leading: imageView.leadingAnchor,
+            trailing: imageView.trailingAnchor
         )
         
         addImageButton.setupAnchors(
@@ -247,15 +261,8 @@ private extension AddNewsViewController {
 // MARK: - Actions
 extension AddNewsViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func setupActions() {
-        setupImageViewGesture()
+        imageContainerButton.addTarget(self, action: #selector(imageViewTapped), for: .touchUpInside)
         createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
-    }
-    
-    private func setupImageViewGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-        tapGesture.numberOfTapsRequired = 1
-        tapGesture.cancelsTouchesInView = false
-        imageView.addGestureRecognizer(tapGesture)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
