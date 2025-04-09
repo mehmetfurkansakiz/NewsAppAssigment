@@ -7,9 +7,17 @@
 
 final class SettingsViewModel: SettingsViewModelProtocol {
     weak var delegate: SettingsViewModelDelegate?
+    private let userRepository: UserRepositoryProtocol
+    private var isAdmin: Bool = false
     
-    var settings: [Settings] {
-        return Settings.allCases
+    private(set) var visibleSections: [SettingsSection] = [] {
+        didSet {
+            notify(.updateTableView)
+        }
+    }
+    
+    init(userRepository: UserRepositoryProtocol = UserRepository()) {
+        self.userRepository = userRepository
     }
     
     func didSelectSetting(at index: Int) {
@@ -26,6 +34,31 @@ final class SettingsViewModel: SettingsViewModelProtocol {
             notify(.showPrivacyPolicy)
         case .termsOfService:
             notify(.showTermsOfService)
+        case .signOut:
+            signOut()
+        }
+    }
+    
+    func checkAdminStatus() {
+        userRepository.checkIsAdmin { [weak self] isAdmin in
+            guard let self = self else { return }
+            self.isAdmin = isAdmin
+            self.updateVisibleSections()
+        }
+    }
+    
+    private func updateVisibleSections() {
+        visibleSections = isAdmin ? SettingsSection.allCases : SettingsSection.allCases.filter { $0 != .admin }
+    }
+    
+    private func signOut() {
+        let result = userRepository.signOut()
+        
+        switch result {
+        case .success:
+            notify(.signOutSuccess)
+        case .failure(let error):
+            notify(.showError(error.localizedDescription))
         }
     }
     

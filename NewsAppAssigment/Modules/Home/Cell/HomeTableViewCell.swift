@@ -99,14 +99,14 @@ private extension HomeTableViewCell {
     func configureLayout() {
         newsImageView.setupAnchors(
             top: contentView.topAnchor, paddingTop: 8,
-            bottom: contentView.bottomAnchor, paddingBottom: 8,
+            bottom: contentView.bottomAnchor, paddingBottom: 16,
             leading: contentView.leadingAnchor,
             width: 120,
             height: 120
         )
         
         titleLabel.setupAnchors(
-            top: contentView.topAnchor, paddingTop: 8,
+            top: newsImageView.topAnchor,
             leading: newsImageView.trailingAnchor, paddingLeading: 8,
             trailing: contentView.trailingAnchor, paddingTrailing: 8
         )
@@ -117,7 +117,7 @@ private extension HomeTableViewCell {
         )
         
         categoryLabel.setupAnchors(
-            bottom: contentView.bottomAnchor, paddingBottom: 8,
+            bottom: newsImageView.bottomAnchor,
             leading: newsImageView.trailingAnchor, paddingLeading: 8
         )
     }

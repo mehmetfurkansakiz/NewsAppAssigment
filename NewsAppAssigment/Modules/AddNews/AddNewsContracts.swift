@@ -20,5 +20,5 @@ enum AddNewsViewModelOutput {
     case showLoading
     case hideLoading
     case showError(String)
-    case newsCreated
+    case newsCreated(String)
 }

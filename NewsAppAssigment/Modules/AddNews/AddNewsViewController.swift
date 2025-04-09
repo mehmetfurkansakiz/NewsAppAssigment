@@ -139,12 +139,10 @@ extension AddNewsViewController: AddNewsViewModelDelegate {
             hideLoadingIndicator()
         case .showError(let message):
             showError(message: message)
-        case .newsCreated:
-            let alert = UIAlertController(title: "Success", message: "News created successfully", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
-            })
-            present(alert, animated: true)
+        case .newsCreated(let message):
+            showSuccess(message: message) {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

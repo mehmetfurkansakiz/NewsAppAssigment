@@ -30,6 +30,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        viewModel.checkAdminStatus()
     }
 }
 
@@ -48,7 +49,13 @@ extension SettingsViewController: SettingsViewModelDelegate {
             print("Show privacy policy")
         case .showTermsOfService:
             print("Show terms of service")
+        case .showError(let message):
+            showError(message: message)
+        case .signOutSuccess:
+            let signInVC = SignInBuilder.make(with: SignInViewModel())
+            navigateToWithAnimation(to: signInVC)
         }
+        
     }
     
     func navigate(to route: SettingsRouter) {
@@ -95,11 +102,11 @@ private extension SettingsViewController {
 // MARK: - TableView
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SettingsSection.allCases.count
+        return viewModel.visibleSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionType = SettingsSection(rawValue: section)!
+        let sectionType = viewModel.visibleSections[section]
         return sectionType.settings.count
     }
     
@@ -108,7 +115,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let sectionType = SettingsSection(rawValue: indexPath.section)!
+        let sectionType = viewModel.visibleSections[indexPath.section]
         let setting = sectionType.settings[indexPath.row]
         cell.configure(with: setting)
         
@@ -122,7 +129,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
         titleLabel.textColor = UIColor(named: "A9A9A9")!
-        titleLabel.text = SettingsSection(rawValue: section)?.title
+        titleLabel.text = viewModel.visibleSections[section].title
         
         headerView.addSubview(titleLabel)
         
@@ -143,7 +150,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let sectionType = SettingsSection(rawValue: indexPath.section)!
+        let sectionType = viewModel.visibleSections[indexPath.section]
         let setting = sectionType.settings[indexPath.row]
         viewModel.didSelectSetting(at: setting.rawValue)
     }

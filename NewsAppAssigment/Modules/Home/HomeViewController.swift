@@ -30,6 +30,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.fetchNews()
     }
 }
@@ -69,8 +73,8 @@ private extension HomeViewController {
     
     func configureLayout() {
         newsTableView.setupAnchors(
-            top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 8,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 8,
+            top: view.safeAreaLayoutGuide.topAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
             leading: view.safeAreaLayoutGuide.leadingAnchor, paddingLeading: 16,
             trailing: view.safeAreaLayoutGuide.trailingAnchor, paddingTrailing: 16
         )

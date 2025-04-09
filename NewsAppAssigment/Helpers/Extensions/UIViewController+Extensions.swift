@@ -50,13 +50,6 @@ extension UIViewController {
         }
     }
     
-    func showError(message: String) {
-        let alert = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel)
-        alert.addAction(action)
-        present(alert, animated: true)
-    }
-    
     func navigateToWithAnimation(to controller: UIViewController, transition: UIView.AnimationOptions = .transitionCrossDissolve, duration: TimeInterval = 0.5) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -69,5 +62,64 @@ extension UIViewController {
                 sceneDelegate.window?.rootViewController = controller
             })
         }
+    }
+    // Alert Extension
+    enum AlertType {
+        case error
+        case success
+        case warning
+        case info
+        
+        var title: String {
+            switch self {
+            case .error: return "Error!"
+            case .success: return "Success!"
+            case .warning: return "Warning!"
+            case .info: return "Info"
+            }
+        }
+        
+        var style: UIAlertAction.Style {
+            switch self {
+            case .error: return .destructive
+            case .success: return .default
+            case .warning: return .default
+            case .info: return .default
+            }
+        }
+    }
+    
+    func showAlert(type: AlertType = .info,
+                  message: String,
+                  buttonTitle: String = "OK",
+                  completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: type.title,
+                                    message: message,
+                                    preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: buttonTitle,
+                                 style: type.style) { _ in
+            completion?()
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+    
+    // Convenience funcs
+    func showError(message: String, completion: (() -> Void)? = nil) {
+        showAlert(type: .error, message: message, completion: completion)
+    }
+    
+    func showSuccess(message: String, completion: (() -> Void)? = nil) {
+        showAlert(type: .success, message: message, completion: completion)
+    }
+    
+    func showWarning(message: String, completion: (() -> Void)? = nil) {
+        showAlert(type: .warning, message: message, completion: completion)
+    }
+    
+    func showInfo(message: String, completion: (() -> Void)? = nil) {
+        showAlert(type: .info, message: message, completion: completion)
     }
 }

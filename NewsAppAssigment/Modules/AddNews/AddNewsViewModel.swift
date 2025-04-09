@@ -10,9 +10,12 @@ import Foundation
 final class AddNewsViewModel: AddNewsViewModelProtocol {
     weak var delegate: AddNewsViewModelDelegate?
     private let newsRepo: NewsRepositoryProtocol
+    private let userRepo: UserRepositoryProtocol
     
-    init(repository: NewsRepositoryProtocol = NewsRepository()) {
-        self.newsRepo = repository
+    init(newsRepository: NewsRepositoryProtocol = NewsRepository(),
+         userRepository: UserRepositoryProtocol = UserRepository()) {
+        self.newsRepo = newsRepository
+        self.userRepo = userRepository
     }
     
     func createNews(news: News) {
@@ -38,24 +41,39 @@ final class AddNewsViewModel: AddNewsViewModelProtocol {
         
         notify(.showLoading)
         
-        let newsToCreate = News(
-            title: title,
-            article: article,
-            category: category,
-            createdAt: Date(),
-            author: "Admin",
-            imageUrl: nil,
-            imageData: imageData
-        )
-        
-        newsRepo.createNews(news: newsToCreate) { [weak self] result in
+        userRepo.getCurrentUser { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                let newsToCreate = News(
+                    title: news.title,
+                    article: news.article,
+                    category: news.category,
+                    createdAt: Date(),
+                    author: user.email?.username,
+                    imageUrl: nil,
+                    imageData: imageData
+                )
+                
+                self.createNewsWithUser(newsToCreate)
+                
+            case .failure(let error):
+                self.notify(.hideLoading)
+                self.notify(.showError(error.localizedDescription))
+            }
+        }
+    }
+    
+    private func createNewsWithUser(_ news: News) {
+        newsRepo.createNews(news: news) { [weak self] result in
             guard let self = self else { return }
             
             self.notify(.hideLoading)
             
             switch result {
             case .success:
-                self.notify(.newsCreated)
+                self.notify(.newsCreated("News created successfully"))
             case .failure(let error):
                 self.notify(.showError(error.localizedDescription))
             }

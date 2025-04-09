@@ -8,4 +8,5 @@
 struct User {
     let id: String
     let email: String?
+    let isAdmin: Bool
 }

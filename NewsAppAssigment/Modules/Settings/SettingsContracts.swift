@@ -7,8 +7,9 @@
 
 protocol SettingsViewModelProtocol {
     var delegate: SettingsViewModelDelegate? { get set }
-    var settings: [Settings] { get }
+    var visibleSections: [SettingsSection] { get }
     func didSelectSetting(at index: Int)
+    func checkAdminStatus()
 }
 
 protocol SettingsViewModelDelegate: AnyObject {
@@ -22,6 +23,8 @@ enum SettingsViewModelOutput {
     case rateApp
     case showPrivacyPolicy
     case showTermsOfService
+    case signOutSuccess
+    case showError(String)
 }
 
 enum SettingsRouter {
@@ -32,12 +35,14 @@ enum SettingsSection: Int, CaseIterable {
     case admin
     case notifications
     case others
+    case account
     
     var title: String {
         switch self {
         case .admin: return "Admin"
         case .notifications: return "Notifications"
         case .others: return "Others"
+        case .account: return "Account"
         }
     }
     
@@ -49,6 +54,8 @@ enum SettingsSection: Int, CaseIterable {
             return [.notification]
         case .others:
             return [.rateUs, .privacyPolicy, .termsOfService]
+        case .account:
+            return [.signOut]
         }
     }
 }
@@ -59,6 +66,7 @@ enum Settings: Int, CaseIterable {
     case rateUs = 2
     case privacyPolicy = 3
     case termsOfService = 4
+    case signOut = 5
     
     var title: String {
         switch self {
@@ -67,6 +75,7 @@ enum Settings: Int, CaseIterable {
         case .rateUs: return "Rate us"
         case .privacyPolicy: return "Privacy policy"
         case .termsOfService: return "Terms of service"
+        case .signOut: return "Sign Out"
         }
     }
     
@@ -77,6 +86,7 @@ enum Settings: Int, CaseIterable {
         case .rateUs: return "star.fill"
         case .privacyPolicy: return "lock.fill"
         case .termsOfService: return "doc.text.fill"
+        case .signOut: return "rectangle.portrait.and.arrow.right"
         }
     }
 }
