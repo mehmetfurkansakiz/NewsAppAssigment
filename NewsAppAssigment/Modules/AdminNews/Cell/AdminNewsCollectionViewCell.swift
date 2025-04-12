@@ -11,7 +11,7 @@ class AdminNewsCollectionViewCell: UICollectionViewCell {
     static let identifier = "AdminNewsCollectionViewCell"
     
     // MARK: - Properties
-    private let stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -20,14 +20,14 @@ class AdminNewsCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let iconImageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = UIColor(named: "FBFBFB")
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "FBFBFB")
         label.textAlignment = .center

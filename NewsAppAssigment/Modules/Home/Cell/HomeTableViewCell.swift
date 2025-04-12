@@ -12,7 +12,7 @@ class HomeTableViewCell: UITableViewCell {
     // MARK: - Properties
     static let identifier = "HomeTableViewCell"
     
-    private let newsImageView: UIImageView = {
+    private lazy var newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -20,7 +20,7 @@ class HomeTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "181818")
@@ -28,14 +28,14 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let authorLabel: UILabel = {
+    private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor(named: "A9A9A9")
         return label
     }()
     
-    private let categoryLabel: UILabel = {
+    private lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor(named: "303030")

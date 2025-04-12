@@ -72,7 +72,7 @@ class UserRepository: UserRepositoryProtocol {
         }
     }
     
-    func getCurrentUser(completion: @escaping (Result<User, NetworkError>) -> Void){
+    func getCurrentUser(completion: @escaping (Result<User, NetworkError>) -> Void) {
         guard let firebaseUser = Auth.auth().currentUser else {
             completion(.failure(.invalidResponse))
             return

@@ -10,19 +10,19 @@ import UIKit
 class AddNewsViewController: UIViewController {
     
     // MARK: - Properties
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     
-    private let contentView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -32,20 +32,20 @@ class AddNewsViewController: UIViewController {
         return imageView
     }()
     
-    private let imageContainerButton: UIButton = {
+    private lazy var imageContainerButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
         return button
     }()
     
-    private let addImageButton: UIButton = {
+    private lazy var addImageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
         button.tintColor = UIColor(named: "6C63FF")
         return button
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
         label.font = .systemFont(ofSize: 16)
@@ -53,7 +53,7 @@ class AddNewsViewController: UIViewController {
         return label
     }()
     
-    private let titleTextField: UITextField = {
+    private lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
@@ -65,7 +65,7 @@ class AddNewsViewController: UIViewController {
         return textField
     }()
     
-    private let categoryLabel: UILabel = {
+    private lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "Category"
         label.font = .systemFont(ofSize: 16)
@@ -73,7 +73,7 @@ class AddNewsViewController: UIViewController {
         return label
     }()
     
-    private let categoryTextField: UITextField = {
+    private lazy var categoryTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
@@ -85,7 +85,7 @@ class AddNewsViewController: UIViewController {
         return textField
     }()
     
-    private let articleLabel: UILabel = {
+    private lazy var articleLabel: UILabel = {
         let label = UILabel()
         label.text = "Article"
         label.font = .systemFont(ofSize: 16)
@@ -93,7 +93,7 @@ class AddNewsViewController: UIViewController {
         return label
     }()
     
-    private let articleTextView: UITextView = {
+    private lazy var articleTextView: UITextView = {
         let textView = UITextView()
         textView.layer.cornerRadius = 8
         textView.layer.borderWidth = 1
@@ -105,7 +105,7 @@ class AddNewsViewController: UIViewController {
         return textView
     }()
     
-    private let createButton: UIButton = {
+    private lazy var createButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create News", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)

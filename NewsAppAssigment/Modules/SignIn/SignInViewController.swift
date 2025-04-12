@@ -10,7 +10,7 @@ import UIKit
 class SignInViewController: UIViewController {
     // MARK: - Properties
 
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "NewsApp"
         label.font = .systemFont(ofSize: 32, weight: .heavy)
@@ -19,14 +19,14 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "male-avatar-icon")
         return imageView
     }()
     
-    private let signInLabel: UILabel = {
+    private lazy var signInLabel: UILabel = {
         let label = UILabel()
         label.text = "Sign In"
         label.font = .systemFont(ofSize: 20, weight: .medium)
@@ -35,7 +35,7 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let emailLabel: UILabel = {
+    private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text = "Email"
         label.font = .systemFont(ofSize: 16)
@@ -43,7 +43,7 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
@@ -62,7 +62,7 @@ class SignInViewController: UIViewController {
         return textField
     }()
     
-    private let passwordLabel: UILabel = {
+    private lazy var passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
         label.font = .systemFont(ofSize: 16)
@@ -70,7 +70,7 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = PasswordTextField()
         textField.borderStyle = .roundedRect
         textField.layer.cornerRadius = 8
@@ -88,7 +88,7 @@ class SignInViewController: UIViewController {
         return textField
     }()
     
-    private let forgotPasswordButton: UIButton = {
+    private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Forgot Password?", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
@@ -96,7 +96,7 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    private let signInButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("SIGN IN", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
@@ -106,7 +106,7 @@ class SignInViewController: UIViewController {
         return button
     }()
     
-    private let orLabel: UILabel = {
+    private lazy var orLabel: UILabel = {
         let label = UILabel()
         label.text = "or"
         label.font = .systemFont(ofSize: 16)
@@ -115,7 +115,7 @@ class SignInViewController: UIViewController {
         return label
     }()
     
-    private let createAccountButton: UIButton = {
+    private lazy var createAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Create an Account", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)

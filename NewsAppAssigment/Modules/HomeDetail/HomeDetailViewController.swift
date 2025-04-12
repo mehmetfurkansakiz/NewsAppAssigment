@@ -11,19 +11,19 @@ import Kingfisher
 class HomeDetailViewController: UIViewController {
     
     // MARK: - Properties
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     
-    private let contentView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "181818")
         label.textAlignment = .left
@@ -32,7 +32,7 @@ class HomeDetailViewController: UIViewController {
         return label
     }()
     
-    private let dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "A9A9A9")
         label.font = .systemFont(ofSize: 14)
@@ -40,7 +40,7 @@ class HomeDetailViewController: UIViewController {
         return label
     }()
     
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
@@ -48,7 +48,7 @@ class HomeDetailViewController: UIViewController {
         return imageView
     }()
     
-    private let articleLabel: UILabel = {
+    private lazy var articleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "303030")
         label.numberOfLines = 0
@@ -56,7 +56,7 @@ class HomeDetailViewController: UIViewController {
         return label
     }()
     
-    private let authorLabel: UILabel = {
+    private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "A9A9A9")
         label.font = .systemFont(ofSize: 14)
@@ -170,14 +170,9 @@ private extension HomeDetailViewController {
             dateLabel.text = dateFormatter.string(from: createdAt)
         }
         
-        if let imageUrl = news.imageUrl, let url = URL(string: imageUrl) {
-            imageView.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "placeholder-image"),
-                options: [
-                    .transition(.fade(0.3)),
-                    .cacheOriginalImage
-                ])
+        if let imageUrlString = news.imageUrl,
+           let imageUrl = URL(string: imageUrlString) {
+            imageView.kf.setImage(with: imageUrl)
         }
     }
 }
