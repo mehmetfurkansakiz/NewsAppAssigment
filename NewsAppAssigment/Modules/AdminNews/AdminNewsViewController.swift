@@ -58,6 +58,8 @@ extension AdminNewsViewController: AdminNewsViewModelDelegate {
         switch route {
         case .addNews(let viewModel):
             controller = AddNewsBuilder.make(with: viewModel)
+        case .contentList(let viewModel):
+            controller = ContentListBuilder.make(with: viewModel)
         }
         
         navigationController?.pushViewController(controller, animated: true)
@@ -116,8 +118,4 @@ extension AdminNewsViewController: UICollectionViewDelegate, UICollectionViewDat
         let selectedAction = adminActions[indexPath.item]
         viewModel.didSelectSetting(at: selectedAction.rawValue)
     }
-}
-
-#Preview {
-    AdminNewsBuilder.make(with: AdminNewsViewModel())
 }

@@ -15,9 +15,9 @@ final class AdminNewsViewModel: AdminNewsViewModelProtocol {
         case .addNews:
             navigate(to: .addNews(AddNewsViewModel()))
         case .editNews:
-            notify(.editNews)
+            navigate(to: .contentList(ContentListViewModel(mode: .update, type: .news)))
         case .deleteNews:
-            notify(.deleteNews)
+            navigate(to: .contentList(ContentListViewModel(mode: .delete, type: .news)))
         case .statistics:
             notify(.statistics)
         case .users:

@@ -125,7 +125,6 @@ class AddNewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        setupActions()
     }
 }
 
@@ -155,6 +154,7 @@ private extension AddNewsViewController {
         
         addViews()
         configureLayout()
+        setupActions()
     }
     
     func addViews() {
@@ -251,7 +251,7 @@ private extension AddNewsViewController {
             bottom: contentView.bottomAnchor, paddingBottom: 16,
             leading: contentView.leadingAnchor, paddingLeading: 16,
             trailing: contentView.trailingAnchor, paddingTrailing: 16,
-            height: 50
+            height: 48
         )
     }
 }
@@ -302,8 +302,4 @@ extension AddNewsViewController: UIImagePickerControllerDelegate & UINavigationC
         
         viewModel.createNews(news: news)
     }
-}
-
-#Preview {
-    AddNewsBuilder.make(with: AddNewsViewModel())
 }

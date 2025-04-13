@@ -27,6 +27,7 @@ enum AdminNewsViewModelOutput {
 
 enum AdminNewsRouter {
     case addNews(AddNewsViewModel)
+    case contentList(ContentListViewModel)
 }
 
 enum AdminActions: Int, CaseIterable {
