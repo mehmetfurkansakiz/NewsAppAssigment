@@ -8,6 +8,7 @@
 import Foundation
 
 struct News {
+    var id: String?
     var title: String?
     var article: String?
     var category: String?
