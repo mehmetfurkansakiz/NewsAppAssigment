@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newspaper-icon" translatesAutoresizingMaskIntoConstraints="NO" id="H1S-JB-R71">
+                                <rect key="frame" x="48" y="186.66666666666663" width="279" height="455"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0A1-KJ-9sc">
+                                <rect key="frame" x="48" y="577.66666666666663" width="279" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="6C63FF"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="FBFBFB"/>
+                        <constraints>
+                            <constraint firstItem="H1S-JB-R71" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="32" id="6wc-3Y-HZu"/>
+                            <constraint firstItem="0A1-KJ-9sc" firstAttribute="leading" secondItem="H1S-JB-R71" secondAttribute="leading" id="OjW-Oe-MNq"/>
+                            <constraint firstItem="H1S-JB-R71" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ajq-aq-kYQ"/>
+                            <constraint firstItem="0A1-KJ-9sc" firstAttribute="top" secondItem="H1S-JB-R71" secondAttribute="bottom" constant="-64" id="kKh-lv-6x1"/>
+                            <constraint firstItem="0A1-KJ-9sc" firstAttribute="trailing" secondItem="H1S-JB-R71" secondAttribute="trailing" id="mTC-E3-D7a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="H1S-JB-R71" secondAttribute="trailing" constant="32" id="nVm-5b-HPv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="newspaper-icon" width="580.1011962890625" height="455.48828125"/>
+        <namedColor name="6C63FF">
+            <color red="0.42352941176470588" green="0.38823529411764707" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FBFBFB">
+            <color red="0.98431372549019602" green="0.98431372549019602" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
