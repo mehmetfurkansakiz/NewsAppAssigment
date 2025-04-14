@@ -70,7 +70,8 @@ Proje MVVM-C (Model-View-ViewModel-Coordinator) mimarisi kullanılarak geliştir
 - **ViewModel**: View ve Model arasındaki iletişimi yönetir
 - **Contracts**: Ekranlar arası geçişleri yönetir
 
-## Özellikler ve Ekran Görüntüleri
+## Video
+https://github.com/user-attachments/assets/66a74bb9-d8f7-4fad-a114-44ae49b191b6
 
 ### Kullanıcı Girişi
 - Email ve şifre ile giriş
@@ -107,7 +108,7 @@ git clone https://github.com/username/NewsApp.git
 * Swift 5.0+
 * SPM
 
-## Kullanılan Kütüphaneler
+## Kullanılan Kütüphaneler
 * Firebase/Auth
 * Firebase/Firestore
 * Firebase/Storage
