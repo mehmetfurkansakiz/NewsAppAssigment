@@ -15,12 +15,30 @@ final class ContentListSearchCell: UITableViewCell, UITextFieldDelegate {
         textField.placeholder = "Search"
         textField.borderStyle = .none
         textField.backgroundColor = UIColor(named: "EEEEEE")
+        textField.textColor = UIColor(named: "303030")
         textField.layer.cornerRadius = 8
         textField.clearButtonMode = .whileEditing
         textField.isUserInteractionEnabled = true
         
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(named: "A9A9A9")!,
+            .font: UIFont.systemFont(ofSize: 16)
+        ]
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Search",
+            attributes: placeholderAttributes
+        )
+        
+        if let clearButton = textField.value(forKey: "_clearButton") as? UIButton {
+            clearButton.setImage(
+                UIImage(systemName: "xmark.circle.fill")?
+                    .withTintColor(UIColor(named: "A9A9A9")!, renderingMode: .alwaysOriginal),
+                for: .normal
+            )
+        }
+        
         let searchImageView = UIImageView(image: UIImage(systemName: "magnifyingglass"))
-        searchImageView.tintColor = UIColor(named: "A9A9A9")
+        searchImageView.tintColor = UIColor(named: "303030")
         searchImageView.contentMode = .center
         searchImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
         
