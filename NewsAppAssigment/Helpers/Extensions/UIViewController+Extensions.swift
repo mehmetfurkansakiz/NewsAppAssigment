@@ -90,15 +90,15 @@ extension UIViewController {
     }
     
     func showAlert(type: AlertType = .info,
-                  message: String,
-                  buttonTitle: String = "OK",
-                  completion: (() -> Void)? = nil) {
+                   message: String,
+                   buttonTitle: String = "OK",
+                   completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: type.title,
-                                    message: message,
-                                    preferredStyle: .alert)
+                                      message: message,
+                                      preferredStyle: .alert)
         
         let action = UIAlertAction(title: buttonTitle,
-                                 style: type.style) { _ in
+                                   style: type.style) { _ in
             completion?()
         }
         
