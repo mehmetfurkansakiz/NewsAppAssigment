@@ -28,6 +28,14 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var articleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = UIColor(named: "303030")
+        label.numberOfLines = 2
+        return label
+    }()
+    
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -62,6 +70,7 @@ class HomeTableViewCell: UITableViewCell {
     
     func configure(with news: News) {
         titleLabel.text = news.title
+        articleLabel.text = news.article
         authorLabel.text = news.author
         if let category = news.category, let createdAt = news.createdAt {
             let timeAgo = Date().timeAgoSinceDate(createdAt)
@@ -92,6 +101,7 @@ private extension HomeTableViewCell {
     func addViews() {
         contentView.addSubview(newsImageView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(articleLabel)
         contentView.addSubview(authorLabel)
         contentView.addSubview(categoryLabel)
     }
@@ -111,9 +121,16 @@ private extension HomeTableViewCell {
             trailing: contentView.trailingAnchor, paddingTrailing: 8
         )
         
-        authorLabel.setupAnchors(
+        articleLabel.setupAnchors(
             top: titleLabel.bottomAnchor, paddingTop: 8,
-            leading: newsImageView.trailingAnchor, paddingLeading: 8
+            leading: newsImageView.trailingAnchor, paddingLeading: 8,
+            trailing: contentView.trailingAnchor, paddingTrailing: 8
+        )
+        
+        authorLabel.setupAnchors(
+            bottom: categoryLabel.topAnchor,
+            leading: newsImageView.trailingAnchor, paddingLeading: 8,
+            trailing: contentView.trailingAnchor, paddingTrailing: 8
         )
         
         categoryLabel.setupAnchors(
