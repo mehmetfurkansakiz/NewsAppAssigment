@@ -12,14 +12,11 @@ NewsApp, iOS platformu için geliştirilmiş bir haber yönetim uygulamasıdır.
 - Haber Yönetimi
   - Haber listeleme
   - Haber detay görüntüleme
-  - Haber arama
-  - Tarih bazlı sıralama
   
 - Admin Paneli
   - Haber ekleme
   - Haber düzenleme
   - Haber silme
-  - İçerik yönetimi
 
 ## Kullanılan Teknolojiler
 
